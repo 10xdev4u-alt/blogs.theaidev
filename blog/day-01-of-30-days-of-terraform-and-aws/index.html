@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="en" class="bg-lempa-bg text-white"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Day 01 Of 30 Days Of Terraform And AWS</title><meta name="description" content="Starting my journey into the cloud."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/_astro/about.CDtHXisU.css"></head> <body class="min-h-screen flex flex-col"> <header class="w-full py-6 px-6 max-w-[1200px] mx-auto flex justify-between items-center"> <!-- Logo / Avatar Small --> <a href="/" class="flex items-center gap-3 group"> <img src="/me.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-transparent group-hover:border-purple-500 transition-all"> <span class="font-bold text-lg text-gray-200 group-hover:text-white">The AI Dev</span> </a> <nav class="hidden md:flex gap-8 text-sm font-medium text-gray-400"> <a href="/blog" class="hover:text-white hover:underline decoration-blue-500 underline-offset-4 transition-all">
+All Posts
+</a> <a href="/tags" class="hover:text-white hover:underline decoration-purple-500 underline-offset-4 transition-all">
+Topics
+</a> <a href="/about" class="hover:text-white hover:underline decoration-green-500 underline-offset-4 transition-all">
+About Me
+</a> </nav> </header> <main class="max-w-[900px] mx-auto px-6 py-12 w-full"> <img src="/images/blog/day-01-of-30-days-of-terraform-and-aws/heroImage.png" alt="Day 01 Of 30 Days Of Terraform And AWS" class="rounded-xl border border-lempa-border mb-8 w-full object-cover shadow-2xl shadow-purple-900/20"> <div class="mb-12 border-b border-lempa-border pb-8"> <div class="flex items-center gap-4 mb-4 text-sm font-mono text-gray-400"> <time datetime="2025-11-24T00:00:00.000Z"> November 24, 2025 </time> <a href="/tags/DevOps" class="px-2 py-0.5 rounded text-xs bg-blue-900/30 text-blue-400 border border-blue-800 hover:bg-blue-900/50 transition-colors uppercase tracking-wide no-underline"> DevOps </a><a href="/tags/Challenges" class="px-2 py-0.5 rounded text-xs bg-blue-900/30 text-blue-400 border border-blue-800 hover:bg-blue-900/50 transition-colors uppercase tracking-wide no-underline"> Challenges </a><a href="/tags/Terraform" class="px-2 py-0.5 rounded text-xs bg-blue-900/30 text-blue-400 border border-blue-800 hover:bg-blue-900/50 transition-colors uppercase tracking-wide no-underline"> Terraform </a><a href="/tags/Arch Linux" class="px-2 py-0.5 rounded text-xs bg-blue-900/30 text-blue-400 border border-blue-800 hover:bg-blue-900/50 transition-colors uppercase tracking-wide no-underline"> Arch Linux </a><a href="/tags/IaC" class="px-2 py-0.5 rounded text-xs bg-blue-900/30 text-blue-400 border border-blue-800 hover:bg-blue-900/50 transition-colors uppercase tracking-wide no-underline"> IaC </a><a href="/tags/30Days" class="px-2 py-0.5 rounded text-xs bg-blue-900/30 text-blue-400 border border-blue-800 hover:bg-blue-900/50 transition-colors uppercase tracking-wide no-underline"> 30Days </a> </div> <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-tight tracking-tight mb-4"> Day 01 Of 30 Days Of Terraform And AWS </h1> <p class="text-xl text-gray-400 font-light leading-relaxed max-w-2xl"> Starting my journey into the cloud. </p> </div> <article class="prose prose-lg max-w-none
+                /* Base Text */
+                prose-p:text-gray-300 prose-p:leading-relaxed
+                
+                /* Headings */
+                prose-headings:font-bold prose-headings:text-white
+                prose-h1:text-4xl prose-h1:mb-8
+                prose-h2:text-2xl prose-h2:text-blue-400 prose-h2:mt-12 prose-h2:border-b prose-h2:border-gray-800 prose-h2:pb-2
+                prose-h3:text-xl prose-h3:text-purple-400 prose-h3:mt-8
+                
+                /* Links */
+                prose-a:text-blue-400 prose-a:no-underline hover:prose-a:text-blue-300 hover:prose-a:underline
+                
+                /* Lists (Fixed Spacing Here!) */
+                prose-ul:list-disc prose-ul:pl-6 prose-li:text-gray-300 prose-li:marker:text-purple-500 prose-li:my-2
+                prose-li:text-gray-300 prose-li:my-2
+                /* Strong/Bold */
+                prose-strong:text-white prose-strong:font-extrabold
+                
+                /* Blockquotes */
+                prose-blockquote:border-l-4 prose-blockquote:border-purple-500 prose-blockquote:bg-[#1e1e20] prose-blockquote:px-6 prose-blockquote:py-2 prose-blockquote:rounded-r-lg prose-blockquote:italic prose-blockquote:text-gray-400
+                
+                /* Images */
+                prose-img:rounded-xl prose-img:shadow-lg prose-img:border prose-img:border-[#2d2d30]
+                
+                /* Horizontal Rules */
+                prose-hr:border-gray-800 prose-hr:my-10"> <h1 id="day-01-introduction-to-terraform">Day 01: Introduction to Terraform 🚀</h1>
+<h2 id="-video-reference">🎥 Video Reference</h2>
+<p>Today’s session is covered in this video: <a href="https://www.youtube.com/watch?v=s5fwSG_00P8">Day 1 - Introduction to Terraform</a></p>
+<h2 id="-concept-learnings-the-why-and-what-of-terraform">🧠 Concept Learnings: The “Why” and “What” of Terraform</h2>
+<p>Day 1 was all about building a solid theoretical foundation. We moved from the “what” of infrastructure to the “how” with code.</p>
+<h3 id="1-understanding-infrastructure-as-code-iac">1. Understanding Infrastructure as Code (IaC)</h3>
+<p>IaC is the practice of managing and provisioning infrastructure through code instead of manual processes. We explored how this paradigm shift is essential for modern software development, enabling speed, reliability, and collaboration.</p>
+<h3 id="2-the-traditional-approach-vs-iac">2. The Traditional Approach vs. IaC</h3>
+<p>We contrasted the old way of “ClickOps” with the new way of IaC, highlighting the challenges of the traditional approach:</p>
+<ul>
+<li><strong>Slow and Error-Prone:</strong> Manual work doesn’t scale.</li>
+<li><strong>Inconsistent Environments:</strong> The “it works on my machine” problem.</li>
+<li><strong>Lack of Version Control:</strong> No audit trail or history.</li>
+</ul>
+<h3 id="3-what-is-terraform">3. What is Terraform?</h3>
+<p>We defined Terraform as a declarative, provider-agnostic IaC tool. The key takeaway is that you define the <strong>desired state</strong> of your infrastructure, and Terraform figures out how to achieve it.</p>
+<h3 id="4-the-core-terraform-workflow">4. The Core Terraform Workflow</h3>
+<p>The entire process of using Terraform boils down to a simple, powerful workflow:</p>
+<ul>
+<li><code>terraform init</code>: Initializes the project, downloading necessary provider plugins.</li>
+<li><code>terraform plan</code>: Shows a preview of the changes to be made. <strong>This is the safety check.</strong></li>
+<li><code>terraform apply</code>: Executes the plan to build or modify the infrastructure.</li>
+<li><code>terraform destroy</code>: Tears down the managed infrastructure.</li>
+</ul>
+<hr/>
+<h2 id="-deep-dive-notes">📚 Deep Dive Notes</h2>
+<p>For those who want to go deeper, I’ve prepared a comprehensive set of notes on the topics covered today. These notes are designed to be a valuable resource for anyone looking to master these foundational concepts.</p>
+<ul>
+<li><a href="/notes/understanding-iac"><strong>01_Understanding_IaC.md</strong></a></li>
+<li><a href="/notes/why-iac"><strong>02_Why_We_Need_IaC.md</strong></a></li>
+<li><a href="/notes/what-is-terraform"><strong>03_What_is_Terraform.md</strong></a></li>
+<li><a href="/notes/challenges"><strong>04_Challenges_with_the_traditional_approach.md</strong></a></li>
+<li><a href="/notes/workflow"><strong>05_Terraform_Workflow.md</strong></a></li>
+<li><a href="/notes/installation"><strong>06_Installing_Terraform_on_Arch_Linux.md</strong></a></li>
+</ul>
+<hr/>
+<h2 id="️-practical-tasks">🛠️ Practical Tasks</h2>
+<h3 id="terraform-installation-on-arch-linux">Terraform Installation on Arch Linux</h3>
+<p>As part of today’s practical exercise, I installed Terraform on my Arch Linux machine. The process is straightforward using the official repositories.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="plaintext"><code><span class="line"><span># Update the system</span></span>
+<span class="line"><span>sudo pacman -Syu</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Install Terraform</span></span>
+<span class="line"><span>sudo pacman -S terraform</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Verify the installation</span></span>
+<span class="line"><span>$ terraform --version</span></span>
+<span class="line"><span>Terraform v1.6.5 on linux_amd64</span></span></code></pre>
+<h2 id="-challenges-faced">🐛 Challenges Faced</h2>
+<ul>
+<li>No major challenges today as the focus was on theory and a simple installation. The <code>pacman</code> package manager on Arch Linux makes the process seamless.</li>
+</ul>
+<h2 id="-verdict">🎯 Verdict</h2>
+<p>Day 1 was a success! I have a strong grasp of the fundamental concepts of IaC and Terraform. My development environment is set up, and I’m ready to start provisioning resources on AWS. The journey from Zero to Hero has officially begun!</p> </article> </main> <footer class="p-4 text-center text-gray-500 text-sm mt-auto border-t border-lempa-border">
+&copy; 2025 The AI Dev. All rights reserved.
+</footer> </body></html>

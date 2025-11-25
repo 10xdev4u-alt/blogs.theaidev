@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="en" class="bg-lempa-bg text-white"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>The Workflow Of Terraform</title><meta name="description" content="Deep Dive Note"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/_astro/about.CDtHXisU.css"></head> <body class="min-h-screen flex flex-col"> <header class="w-full py-6 px-6 max-w-[1200px] mx-auto flex justify-between items-center"> <!-- Logo / Avatar Small --> <a href="/" class="flex items-center gap-3 group"> <img src="/me.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-transparent group-hover:border-purple-500 transition-all"> <span class="font-bold text-lg text-gray-200 group-hover:text-white">The AI Dev</span> </a> <nav class="hidden md:flex gap-8 text-sm font-medium text-gray-400"> <a href="/blog" class="hover:text-white hover:underline decoration-blue-500 underline-offset-4 transition-all">
+All Posts
+</a> <a href="/tags" class="hover:text-white hover:underline decoration-purple-500 underline-offset-4 transition-all">
+Topics
+</a> <a href="/about" class="hover:text-white hover:underline decoration-green-500 underline-offset-4 transition-all">
+About Me
+</a> </nav> </header> <main class="max-w-[800px] mx-auto px-6 py-12 w-full"> <a href="/blog/day-01-of-30-days-of-terraform-and-aws" class="inline-flex items-center gap-2 text-gray-500 hover:text-white mb-8 text-sm group transition-colors"> <span class="group-hover:-translate-x-1 transition-transform">←</span> <span>Back to Article</span> </a> <div class="mb-8 border-b border-lempa-border pb-4"> <span class="text-purple-400 text-xs font-mono uppercase tracking-widest">Deep Dive Note</span> <h1 class="text-3xl font-bold text-white mt-2">The Workflow Of Terraform</h1> </div> <article class="prose prose-invert max-w-none prose-p:text-gray-300"> <h1 id="day-1-the-terraform-workflow">Day 1: The Terraform Workflow</h1>
+<p>Understanding the core Terraform workflow is essential to using the tool effectively. It’s a simple, repeatable process that ensures safety, predictability, and control over your infrastructure. The workflow revolves around four key commands: <code>init</code>, <code>plan</code>, <code>apply</code>, and <code>destroy</code>.</p>
+<p>Let’s break down each step of this workflow.</p>
+<h2 id="the-core-workflow-init---plan---apply">The Core Workflow: <code>init -> plan -> apply</code></h2>
+<p>This three-step process is what you’ll use every time you create or update infrastructure with Terraform.</p>
+<h3 id="1-terraform-init">1. <code>terraform init</code></h3>
+<p>The <code>terraform init</code> command is the first command you’ll run in a new Terraform configuration. It performs several initialization steps to prepare the working directory for use with Terraform.</p>
+<p><strong>What does it do?</strong></p>
+<ul>
+<li><strong>Provider Installation:</strong> Terraform reads your configuration files (e.g., <code>main.tf</code>), determines which providers you’re using (e.g., <code>aws</code>, <code>google</code>, <code>azure</code>), and downloads and installs them into a <code>.terraform</code> subdirectory. These providers are the plugins that allow Terraform to interact with the various cloud APIs.</li>
+<li><strong>Backend Initialization:</strong> If you’re using a remote backend to store your state file (which is highly recommended), <code>terraform init</code> will configure the connection to that backend. We’ll cover backends in detail later in the course.</li>
+</ul>
+<p>You only need to run <code>terraform init</code> once per session, or whenever you add a new provider to your configuration.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>+-----------------------------+      +-----------------------------+</span></span>
+<span class="line"><span>|      Your Local Machine     |      |   Terraform Registry        |</span></span>
+<span class="line"><span>+-----------------------------+      +-----------------------------+</span></span>
+<span class="line"><span>|                             |      |                             |</span></span>
+<span class="line"><span>|  terraform.tfvars           |      |  +-----------------------+  |</span></span>
+<span class="line"><span>|  main.tf  (defines provider)|      |  | Provider "aws" v5.0   |  |</span></span>
+<span class="line"><span>|  ...                        |      |  +-----------------------+  |</span></span>
+<span class="line"><span>|                             |      |                             |</span></span>
+<span class="line"><span>|  `terraform init` is run    |      |                             |</span></span>
+<span class="line"><span>|                             |      |                             |</span></span>
+<span class="line"><span>|  Downloads provider "aws"   | &#x3C;----o                             |</span></span>
+<span class="line"><span>|                             |      |                             |</span></span>
+<span class="line"><span>|  Installs it in .terraform/ |      |                             |</span></span>
+<span class="line"><span>+-----------------------------+      +-----------------------------+</span></span></code></pre>
+<h3 id="2-terraform-plan">2. <code>terraform plan</code></h3>
+<p>The <code>terraform plan</code> command is arguably the most important command in the Terraform workflow. It creates an <strong>execution plan</strong>, which is a “dry run” of the changes Terraform will make to your infrastructure.</p>
+<p><strong>What does it do?</strong></p>
+<ul>
+<li><strong>Compares Desired and Actual State:</strong> Terraform reads your configuration to determine the <strong>desired state</strong> of your infrastructure. It then reads the state file to determine the <strong>actual state</strong>. It also queries the cloud provider for any drift that may have occurred.</li>
+<li><strong>Generates a Plan:</strong> Terraform then generates a plan that outlines the actions it will take to make the actual state match the desired state. The plan will show you which resources will be created, updated, or destroyed.</li>
+</ul>
+<p>The output of <code>terraform plan</code> is color-coded for clarity:</p>
+<ul>
+<li><code>+</code> (green): A resource will be created.</li>
+<li><code>-</code> (red): A resource will be destroyed.</li>
+<li><code>~</code> (yellow): A resource will be updated in-place.</li>
+<li><code>-/+</code> (red/green): A resource will be destroyed and recreated.</li>
+</ul>
+<p><strong>This is your opportunity to review and sanity-check the changes before they are applied.</strong> This step prevents surprises and gives you confidence that the changes you’re making are the ones you intended.</p>
+<p><strong>Scenario: A Sanity Check</strong></p>
+<p>You’ve written some Terraform code to create a new EC2 instance. You run <code>terraform plan</code> and see the following output:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Terraform will perform the following actions:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  # aws_instance.web will be created</span></span>
+<span class="line"><span>  + resource "aws_instance" "web" {</span></span>
+<span class="line"><span>      + ami           = "ami-0c55b159cbfafe1f0"</span></span>
+<span class="line"><span>      + instance_type = "t2.micro"</span></span>
+<span class="line"><span>      + ...</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Plan: 1 to add, 0 to change, 0 to destroy.</span></span></code></pre>
+<p>This confirms that Terraform is going to create one new resource, as expected. If you saw a plan that was going to destroy existing resources, you would know that something was wrong with your configuration and you could fix it before applying the changes.</p>
+<h3 id="3-terraform-apply">3. <code>terraform apply</code></h3>
+<p>The <code>terraform apply</code> command executes the plan generated by <code>terraform plan</code>. It makes the actual API calls to the cloud provider to create, update, or destroy resources.</p>
+<p><strong>What does it do?</strong></p>
+<ul>
+<li><strong>Applies the Changes:</strong> Terraform executes the actions outlined in the plan in the correct order, respecting any dependencies between resources.</li>
+<li><strong>Updates the State File:</strong> Once the changes have been applied successfully, Terraform updates the state file to reflect the new state of your infrastructure.</li>
+</ul>
+<p>By default, <code>terraform apply</code> will show you the plan again and ask for your confirmation before proceeding. You can skip this interactive prompt by using the <code>-auto-approve</code> flag, which is common in CI/CD environments.</p>
+<h2 id="the-teardown-workflow-terraform-destroy">The Teardown Workflow: <code>terraform destroy</code></h2>
+<p>Sometimes, you need to tear down the infrastructure you’ve created. This is where the <code>terraform destroy</code> command comes in.</p>
+<h3 id="4-terraform-destroy">4. <code>terraform destroy</code></h3>
+<p>The <code>terraform destroy</code> command is a convenient way to destroy all of the resources managed by your Terraform configuration.</p>
+<p><strong>What does it do?</strong></p>
+<ul>
+<li><strong>Generates a Destruction Plan:</strong> Similar to <code>terraform plan</code>, it generates a plan that shows you all of the resources that will be destroyed.</li>
+<li><strong>Destroys the Resources:</strong> Once you confirm the plan, Terraform will destroy all of the resources in the correct order.</li>
+<li><strong>Updates the State File:</strong> The state file is updated to reflect that all of the resources have been destroyed.</li>
+</ul>
+<p>This command is incredibly useful for cleaning up temporary environments, such as those used for development, testing, or training.</p>
+<hr>
+<p>This <code>init -> plan -> apply</code> workflow is the bedrock of using Terraform. It provides a safe, predictable, and repeatable process for managing the entire lifecycle of your infrastructure. As you become more familiar with these commands, you’ll start to appreciate the power and elegance of this workflow.</p> </article> </main> <footer class="p-4 text-center text-gray-500 text-sm mt-auto border-t border-lempa-border">
+&copy; 2025 The AI Dev. All rights reserved.
+</footer> </body></html>

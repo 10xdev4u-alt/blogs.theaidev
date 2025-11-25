@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="en" class="bg-lempa-bg text-white"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>What Is Terraform?</title><meta name="description" content="Deep Dive Note"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/_astro/about.CDtHXisU.css"></head> <body class="min-h-screen flex flex-col"> <header class="w-full py-6 px-6 max-w-[1200px] mx-auto flex justify-between items-center"> <!-- Logo / Avatar Small --> <a href="/" class="flex items-center gap-3 group"> <img src="/me.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-transparent group-hover:border-purple-500 transition-all"> <span class="font-bold text-lg text-gray-200 group-hover:text-white">The AI Dev</span> </a> <nav class="hidden md:flex gap-8 text-sm font-medium text-gray-400"> <a href="/blog" class="hover:text-white hover:underline decoration-blue-500 underline-offset-4 transition-all">
+All Posts
+</a> <a href="/tags" class="hover:text-white hover:underline decoration-purple-500 underline-offset-4 transition-all">
+Topics
+</a> <a href="/about" class="hover:text-white hover:underline decoration-green-500 underline-offset-4 transition-all">
+About Me
+</a> </nav> </header> <main class="max-w-[800px] mx-auto px-6 py-12 w-full"> <a href="/blog/day-01-of-30-days-of-terraform-and-aws" class="inline-flex items-center gap-2 text-gray-500 hover:text-white mb-8 text-sm group transition-colors"> <span class="group-hover:-translate-x-1 transition-transform">←</span> <span>Back to Article</span> </a> <div class="mb-8 border-b border-lempa-border pb-4"> <span class="text-purple-400 text-xs font-mono uppercase tracking-widest">Deep Dive Note</span> <h1 class="text-3xl font-bold text-white mt-2">What Is Terraform?</h1> </div> <article class="prose prose-invert max-w-none prose-p:text-gray-300"> <h1 id="day-1-what-is-terraform">Day 1: What is Terraform?</h1>
+<p>We’ve established the “why” of Infrastructure as Code. Now, let’s meet the “how”: <strong>Terraform</strong>.</p>
+<h2 id="what-is-terraform">What is Terraform?</h2>
+<p><strong>Terraform is an open-source Infrastructure as Code (IaC) tool, created by HashiCorp, that allows you to safely and predictably create, change, and improve infrastructure.</strong></p>
+<p>It uses a high-level configuration language called <strong>HashiCorp Configuration Language (HCL)</strong> to describe your desired infrastructure, and then it generates a plan to provision that infrastructure on any cloud provider.</p>
+<p>Think of Terraform as a “master translator” for cloud APIs. You write a single configuration in HCL, and Terraform can translate that into API calls for AWS, Azure, Google Cloud, and hundreds of other providers.</p>
+<h3 id="the-write-plan-apply-workflow">The “Write, Plan, Apply” Workflow</h3>
+<p>Terraform’s core workflow is simple, yet incredibly powerful:</p>
+<ol>
+<li><strong>Write:</strong> You define your infrastructure in HCL files (e.g., <code>main.tf</code>).</li>
+<li><strong>Plan:</strong> You run <code>terraform plan</code> to see what changes Terraform will make to your infrastructure. This is a crucial step that allows you to review and validate your changes before they are applied.</li>
+<li><strong>Apply:</strong> You run <code>terraform apply</code> to execute the plan and provision your infrastructure.</li>
+</ol>
+<p>This workflow is central to Terraform’s philosophy of “safe and predictable changes.”</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>+-----------------------+      +----------------------+      +---------------------+</span></span>
+<span class="line"><span>|      You (The User)   |      |      Terraform       |      |   Cloud Providers   |</span></span>
+<span class="line"><span>+-----------------------+      +----------------------+      +---------------------+</span></span>
+<span class="line"><span>           |                             |                             |</span></span>
+<span class="line"><span>           |  1. Writes HCL config       |                             |</span></span>
+<span class="line"><span>           |  (e.g., main.tf)            |                             |</span></span>
+<span class="line"><span>           +---------------------------> |                             |</span></span>
+<span class="line"><span>           |                             |                             |</span></span>
+<span class="line"><span>           |  2. Runs `terraform plan`   |                             |</span></span>
+<span class="line"><span>           +---------------------------> |  Generates execution plan   |</span></span>
+<span class="line"><span>           |                             |                             |</span></span>
+<span class="line"><span>           |  &#x3C;---------------------------+  Shows you the plan        |</span></span>
+<span class="line"><span>           |                             |                             |</span></span>
+<span class="line"><span>           |  3. Runs `terraform apply`  |                             |</span></span>
+<span class="line"><span>           +---------------------------> |  Executes the plan          |</span></span>
+<span class="line"><span>           |                             +---------------------------> | AWS API             |</span></span>
+<span class="line"><span>           |                             +---------------------------> | Azure API           |</span></span>
+<span class="line"><span>           |                             +---------------------------> | GCP API             |</span></span>
+<span class="line"><span>           |                             |                             |</span></span></code></pre>
+<h2 id="key-benefits-of-terraform">Key Benefits of Terraform</h2>
+<p>While many of the benefits of Terraform are inherent to IaC in general, Terraform has some unique features that make it a standout choice.</p>
+<h3 id="1-provider-agnostic-multi-cloud">1. Provider-Agnostic (Multi-Cloud)</h3>
+<p>This is perhaps Terraform’s most significant advantage. Terraform is not tied to a specific cloud provider. You can use the same tool and workflow to manage your infrastructure across AWS, Azure, Google Cloud, and even on-premises data centers.</p>
+<p><strong>Scenario: A Multi-Cloud Strategy</strong></p>
+<p>Your company decides to adopt a multi-cloud strategy to avoid vendor lock-in and leverage the best services from different providers. They want to use AWS for their core computing (EC2), Google Cloud for their data analytics (BigQuery), and Cloudflare for their DNS and CDN.</p>
+<p>Without Terraform, your operations team would need to learn and master three different sets of tools and APIs. With Terraform, they can use a single, consistent workflow to manage all of these resources.</p>
+<p>Your <code>main.tf</code> might look something like this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="hcl"><code><span class="line"><span style="color:#6A737D"># Configure the AWS provider</span></span>
+<span class="line"><span style="color:#B392F0">provider</span><span style="color:#79B8FF"> "aws"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  region</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "us-west-2"</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Configure the Google Cloud provider</span></span>
+<span class="line"><span style="color:#B392F0">provider</span><span style="color:#79B8FF"> "google"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  project</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "my-gcp-project"</span></span>
+<span class="line"><span style="color:#E1E4E8">  region</span><span style="color:#F97583">  =</span><span style="color:#9ECBFF"> "us-central1"</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Configure the Cloudflare provider</span></span>
+<span class="line"><span style="color:#B392F0">provider</span><span style="color:#79B8FF"> "cloudflare"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  api_token</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> var</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">cloudflare_api_token</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Provision an EC2 instance on AWS</span></span>
+<span class="line"><span style="color:#B392F0">resource</span><span style="color:#79B8FF"> "aws_instance"</span><span style="color:#79B8FF"> "web"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  ami</span><span style="color:#F97583">           =</span><span style="color:#9ECBFF"> "ami-0c55b159cbfafe1f0"</span></span>
+<span class="line"><span style="color:#E1E4E8">  instance_type</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "t2.micro"</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Provision a BigQuery dataset on GCP</span></span>
+<span class="line"><span style="color:#B392F0">resource</span><span style="color:#79B8FF"> "google_bigquery_dataset"</span><span style="color:#79B8FF"> "dataset"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  dataset_id</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "my_dataset"</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>This ability to manage a multi-cloud environment from a single control plane is a game-changer for modern enterprises.</p>
+<h3 id="2-the-state-file">2. The State File</h3>
+<p>Terraform records information about the infrastructure it manages in a <strong>state file</strong>. This file acts as a “map” between your Terraform configuration and the real-world resources.</p>
+<p>The state file is crucial for:</p>
+<ul>
+<li><strong>Performance:</strong> Terraform stores the IDs of the resources it manages, so it doesn’t have to query the cloud provider for every resource on every run.</li>
+<li><strong>Dependency Management:</strong> Terraform can build a dependency graph of your resources and provision them in the correct order. For example, it knows that it needs to create a VPC before it can create a subnet within that VPC.</li>
+<li><strong>Drift Detection:</strong> As we discussed earlier, Terraform uses the state file to compare your configuration with the real world and detect drift.</li>
+</ul>
+<p><strong>Important:</strong> The state file is a critical piece of your infrastructure. It often contains sensitive information and must be stored securely. We will cover state management in depth later in this course.</p>
+<h3 id="3-the-declarative-model">3. The Declarative Model</h3>
+<p>Terraform uses a <strong>declarative</strong> approach to IaC. This means you describe the <strong>desired end state</strong> of your infrastructure, and Terraform figures out the most efficient way to get there.</p>
+<p>This is in contrast to an <strong>imperative</strong> approach (used by tools like Ansible or shell scripts), where you have to specify the exact sequence of steps to take.</p>
+<p><strong>Scenario: Scaling a Web Farm</strong></p>
+<p>You have a fleet of 5 web servers defined in your Terraform configuration:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="hcl"><code><span class="line"><span style="color:#B392F0">resource</span><span style="color:#79B8FF"> "aws_instance"</span><span style="color:#79B8FF"> "web"</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  count</span><span style="color:#F97583">         =</span><span style="color:#79B8FF"> 5</span></span>
+<span class="line"><span style="color:#E1E4E8">  ami</span><span style="color:#F97583">           =</span><span style="color:#9ECBFF"> "ami-0c55b159cbfafe1f0"</span></span>
+<span class="line"><span style="color:#E1E4E8">  instance_type</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "t2.micro"</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Now, you need to scale up to 10 servers. With a declarative tool like Terraform, you simply change <code>count = 5</code> to <code>count = 10</code>.</p>
+<p>When you run <code>terraform plan</code>, Terraform will see that the desired state is 10 instances, the current state (from the state file) is 5 instances, and it will generate a plan to create 5 new instances.</p>
+<p>With an imperative tool, you would have to write a script that says, “check how many servers are running, and if it’s less than 10, create the missing number of servers.” This is much more complex and error-prone.</p>
+<hr>
+<p>Terraform’s provider-agnostic nature, powerful state management, and declarative approach make it the de facto standard for IaC in the modern cloud era. As we continue our journey, you’ll see just how powerful and flexible this tool can be.</p> </article> </main> <footer class="p-4 text-center text-gray-500 text-sm mt-auto border-t border-lempa-border">
+&copy; 2025 The AI Dev. All rights reserved.
+</footer> </body></html>

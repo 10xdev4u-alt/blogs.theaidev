@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="en" class="bg-lempa-bg text-white"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Installing Terraform</title><meta name="description" content="Deep Dive Note"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/_astro/about.CDtHXisU.css"></head> <body class="min-h-screen flex flex-col"> <header class="w-full py-6 px-6 max-w-[1200px] mx-auto flex justify-between items-center"> <!-- Logo / Avatar Small --> <a href="/" class="flex items-center gap-3 group"> <img src="/me.jpg" alt="Logo" class="w-10 h-10 rounded-full border-2 border-transparent group-hover:border-purple-500 transition-all"> <span class="font-bold text-lg text-gray-200 group-hover:text-white">The AI Dev</span> </a> <nav class="hidden md:flex gap-8 text-sm font-medium text-gray-400"> <a href="/blog" class="hover:text-white hover:underline decoration-blue-500 underline-offset-4 transition-all">
+All Posts
+</a> <a href="/tags" class="hover:text-white hover:underline decoration-purple-500 underline-offset-4 transition-all">
+Topics
+</a> <a href="/about" class="hover:text-white hover:underline decoration-green-500 underline-offset-4 transition-all">
+About Me
+</a> </nav> </header> <main class="max-w-[800px] mx-auto px-6 py-12 w-full"> <a href="/blog/day-01-of-30-days-of-terraform-and-aws" class="inline-flex items-center gap-2 text-gray-500 hover:text-white mb-8 text-sm group transition-colors"> <span class="group-hover:-translate-x-1 transition-transform">←</span> <span>Back to Article</span> </a> <div class="mb-8 border-b border-lempa-border pb-4"> <span class="text-purple-400 text-xs font-mono uppercase tracking-widest">Deep Dive Note</span> <h1 class="text-3xl font-bold text-white mt-2">Installing Terraform</h1> </div> <article class="prose prose-invert max-w-none prose-p:text-gray-300"> <h1 id="day-1-installing-terraform-on-arch-linux">Day 1: Installing Terraform on Arch Linux</h1>
+<p>A craftsman is only as good as their tools. For the next 30 days, our primary tool will be Terraform. This guide provides a detailed, step-by-step process for installing Terraform on an Arch Linux system. While Terraform installation is generally straightforward, we’ll cover the “Arch way” and discuss some best practices.</p>
+<p>Arch Linux, being a rolling-release distribution, often has the latest software in its official repositories or in the Arch User Repository (AUR). This makes installation a clean and simple process.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before we begin, you should have:</p>
+<ol>
+<li>A working Arch Linux installation.</li>
+<li><code>sudo</code> privileges.</li>
+<li>A terminal emulator.</li>
+<li>A healthy sense of curiosity!</li>
+</ol>
+<h2 id="method-1-using-the-official-repositories-recommended">Method 1: Using the Official Repositories (Recommended)</h2>
+<p>The recommended and simplest way to install Terraform on Arch Linux is by using the <code>pacman</code> package manager. The Terraform package is available in the official <code>community</code> repository.</p>
+<h3 id="step-1-update-your-system">Step 1: Update Your System</h3>
+<p>It’s always a good practice to ensure your system is up-to-date before installing new packages. Open your terminal and run:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> pacman</span><span style="color:#79B8FF"> -Syu</span></span></code></pre>
+<p>This command synchronizes your package databases and updates all the packages on your system.</p>
+<h3 id="step-2-install-terraform">Step 2: Install Terraform</h3>
+<p>Once your system is updated, you can install Terraform with a single command:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> pacman</span><span style="color:#79B8FF"> -S</span><span style="color:#9ECBFF"> terraform</span></span></code></pre>
+<p>Pacman will handle the download, installation, and any necessary dependencies.</p>
+<h3 id="step-3-verify-the-installation">Step 3: Verify the Installation</h3>
+<p>After the installation is complete, you can verify that Terraform is installed correctly by checking its version:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">terraform</span><span style="color:#79B8FF"> --version</span></span></code></pre>
+<p>You should see output similar to this (the version number may vary):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Terraform v1.6.5</span></span>
+<span class="line"><span>on linux_amd64</span></span></code></pre>
+<p>You can also get more detailed version information, including the versions of the providers you have installed, by running:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">terraform</span><span style="color:#9ECBFF"> version</span></span></code></pre>
+<h3 id="step-4-enable-tab-completion-optional-but-recommended">Step 4: Enable Tab Completion (Optional but Recommended)</h3>
+<p>Terraform provides a command to generate shell completion scripts. This is a huge quality-of-life improvement that will save you a lot of typing.</p>
+<p>To enable tab completion for your current session, run:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">source</span><span style="color:#9ECBFF"> &#x3C;(</span><span style="color:#B392F0">terraform</span><span style="color:#79B8FF"> -install-autocomplete</span><span style="color:#9ECBFF">)</span></span></code></pre>
+<p>To make this change permanent, add the following line to your shell’s configuration file (e.g., <code>~/.bashrc</code>, <code>~/.zshrc</code>):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># For Bash</span></span>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> "source &#x3C;(terraform -install-autocomplete)"</span><span style="color:#F97583"> >></span><span style="color:#9ECBFF"> ~/.bashrc</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># For Zsh</span></span>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> "source &#x3C;(terraform -install-autocomplete)"</span><span style="color:#F97583"> >></span><span style="color:#9ECBFF"> ~/.zshrc</span></span></code></pre>
+<p>Then, source your configuration file or open a new terminal for the changes to take effect.</p>
+<h2 id="method-2-using-an-aur-helper-eg-yay">Method 2: Using an AUR Helper (e.g., <code>yay</code>)</h2>
+<p>If for some reason the Terraform package is not in the official repositories, or if you prefer to use the AUR, you can use an AUR helper like <code>yay</code>.</p>
+<h3 id="step-1-install-an-aur-helper-if-you-dont-have-one">Step 1: Install an AUR Helper (if you don’t have one)</h3>
+<p>If you don’t have <code>yay</code> or another AUR helper installed, you can install it with the following commands:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> pacman</span><span style="color:#79B8FF"> -S</span><span style="color:#79B8FF"> --needed</span><span style="color:#9ECBFF"> git</span><span style="color:#9ECBFF"> base-devel</span></span>
+<span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> clone</span><span style="color:#9ECBFF"> https://aur.archlinux.org/yay.git</span></span>
+<span class="line"><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> yay</span></span>
+<span class="line"><span style="color:#B392F0">makepkg</span><span style="color:#79B8FF"> -si</span></span></code></pre>
+<h3 id="step-2-install-terraform-using-yay">Step 2: Install Terraform using <code>yay</code></h3>
+<p>Once you have <code>yay</code> installed, you can install Terraform with:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">yay</span><span style="color:#79B8FF"> -S</span><span style="color:#9ECBFF"> terraform-bin</span></span></code></pre>
+<p>The <code>terraform-bin</code> package in the AUR installs the official, pre-compiled binary from HashiCorp.</p>
+<h2 id="method-3-manual-installation-the-old-school-way">Method 3: Manual Installation (The “Old School” Way)</h2>
+<p>While using a package manager is recommended, it’s also possible to install Terraform manually. This can be useful if you need to have multiple versions of Terraform installed or if you want more control over the installation process.</p>
+<h3 id="step-1-download-the-terraform-binary">Step 1: Download the Terraform Binary</h3>
+<p>Go to the official Terraform downloads page (<a href="https://www.terraform.io/downloads.html">https://www.terraform.io/downloads.html</a>) and download the appropriate binary for your system (it will be a <code>.zip</code> file for Linux, amd64).</p>
+<h3 id="step-2-unzip-the-file">Step 2: Unzip the File</h3>
+<p>Unzip the downloaded file. This will extract a single binary file named <code>terraform</code>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">unzip</span><span style="color:#9ECBFF"> terraform_</span><span style="color:#79B8FF">*</span><span style="color:#9ECBFF">.zip</span></span></code></pre>
+<h3 id="step-3-move-the-binary-to-your-path">Step 3: Move the Binary to Your PATH</h3>
+<p>To make the <code>terraform</code> command available system-wide, you need to move the binary to a directory that is in your system’s <code>PATH</code>. A common choice is <code>/usr/local/bin</code>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> mv</span><span style="color:#9ECBFF"> terraform</span><span style="color:#9ECBFF"> /usr/local/bin/</span></span></code></pre>
+<h3 id="step-4-verify-the-installation">Step 4: Verify the Installation</h3>
+<p>Run <code>terraform --version</code> to ensure that the system can find and execute the binary.</p>
+<hr>
+<h2 id="conclusion-ready-for-action">Conclusion: Ready for Action!</h2>
+<p>Regardless of the method you chose, you now have Terraform installed and ready to go on your Arch Linux machine. This is a critical first step in our journey. With our tools in place and a solid understanding of the foundational concepts, we are now ready to start writing some code and building our first piece of cloud infrastructure.</p>
+<p>In the next section, we’ll configure our AWS credentials and write our first Terraform file. Let’s get to it!</p> </article> </main> <footer class="p-4 text-center text-gray-500 text-sm mt-auto border-t border-lempa-border">
+&copy; 2025 The AI Dev. All rights reserved.
+</footer> </body></html>
